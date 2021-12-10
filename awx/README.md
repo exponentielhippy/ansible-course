@@ -26,9 +26,10 @@ vi vars.yml
 admin_password: 'adminpass'
 pg_password: 'pgpass'
 secret_key: 'mysupersecret'
+```
 do Esc and :wq
 ansible-playbook -i inventory install.yml -e @vars.yml
-```
+
 
 ## AWX Tutorial
 Create a user  

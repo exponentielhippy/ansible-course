@@ -97,7 +97,7 @@ copier le code suivant
     has_wiki: no
     has_downloads: no
     state: present
-  register: result
+  register: resultcd 
 ```
 Dans  example-role/github.role/defaults/main.yml
 ```yaml
@@ -118,7 +118,12 @@ Cryptez la variable token dans votre projet example github.role/defaults/main.ym
 Tapez  
 ```ansible-vault encrypt  main.yml```   
 entrez votre mot de passe   
+
+Au cas ou, changer le mot de passe de chiffrement :
+```ansible-vault rekey  main.yml```
+
 mettrez ce mot de passe dans un fichier  
+
 ```vi /home/<home_directory>/mysecret```   
 Vous pouvez executer le playbook avec une variable dans le example-role directory   
 ```ansible-playbook -i inventory_children --vault-password-file ~/mysecret playbook.yml```   
@@ -143,7 +148,7 @@ Creez un fichier playbook.yaml
 ```
 Faire la commande Ad-Hoc pour obtenir la distribution et la version de Centos 
 ```shell
-ansible leader -m setup -a "filter=ansible_distribution,ansible_distribution_version "  -i inventory_gluster
+ansible leader -m setup -a "filter=ansible_distribution,ansible_distribution_version "  -i inventory_children
 ```
 Dans la directory tasks du role, creez le fichier variables.yml
 ```yaml
@@ -290,9 +295,9 @@ postgresql_service_enabled: true
 
 postgresql_users_no_log: true
 
-postgresql_users: []
+postgresql_users: []:
 ```
-Dans la directory ansible-postgresql creez une directory templates  
+Dans la directory postgresql.role  creez une directory templates  
 et creez le fichier postgres.sh.j2
 
 ```shell
@@ -302,7 +307,7 @@ export PATH=$PATH:{{ postgresql_bin_path }}
 
 Testez  
 
-```ansible-playbook -i inventory_gluster playbook.yaml```
+```ansible-playbook -i inventory_children playbook.yaml```
 
 ## Choisir entre un Docker-compose ou un script ansible-playbook 
 Connectez vous en ssh sur le remote ubuntu

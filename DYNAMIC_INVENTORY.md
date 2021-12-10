@@ -69,6 +69,7 @@ where h.hostid = i.hostid and h.hostid = g.hostid and h.status=0 and g.groupid =
 ## zabbix.py program is using Zabbix API functions
 Do a cd zabbbix 
 ```shell
+pip3 install zabbix-api
 chmod +x zabbix.py 
 ZABBIX_TEMPLATES='Linux by Zabbix agent' ansible-playbook -i zabbix.py ../ansible_ping.yml
  ```
